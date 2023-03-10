@@ -1,0 +1,27 @@
+import win32com.client as win32
+import os
+
+# Caminho completo para o arquivo Excel que será enviado
+excel_file_path = r"C:\Caminho\para\o\arquivo.xlsx"
+
+# Cria um objeto do Outlook
+outlook = win32.Dispatch('outlook.application')
+
+# Cria um objeto de e-mail
+email = outlook.CreateItem(0)
+
+# Adiciona os destinatários
+email.To = "destinatario1@exemplo.com; destinatario2@exemplo.com"
+
+# Adiciona o assunto
+email.Subject = "Assunto do e-mail"
+
+# Adiciona o corpo do e-mail
+email.Body = "Corpo do e-mail"
+
+# Adiciona o arquivo Excel como anexo
+attachment = os.path.abspath(excel_file_path)
+email.Attachments.Add(attachment)
+
+# Envia o e-mail
+email.Send()
